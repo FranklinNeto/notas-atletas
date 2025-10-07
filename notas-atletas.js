@@ -22,33 +22,76 @@ cinco notas atribuídas. A sua função deverá calcular a média das notas sem 
 atleta. Por fim, deverá apresentar ao usuário o nome de cada atleta, seguido das notas e da média calculada. */
 
 
-
-
-function obterMaiorNota(notas){
-
-    notas.sort((a, b) => a - b)
-    return notas[notas.length-1]
+/* function obterMaiorNota(notas){
+    notasCopy = [...notas]
+    notasCopy.sort((a, b) => a - b)
+    return notasCopy[notas.length-1]
 
 }
 
 function obterMenorNota(notas){
-    notas.sort((a, b) => a - b)
-    return notas[0]
-}
+    let notasCopy = [...notas]
+    notasCopy.sort((a, b) => a - b)
+    return notasCopy[0]
+} */
 
 function calcularMediaSemAMenorEMaiorNota(atleta){
 
-    let notas = atleta.notas
-    let maiorNota = obterMaiorNota(notas)
-    let menorNota = obterMenorNota(notas)
+    let notasCopy = [...atleta.notas]
+    
+    notasCopy.sort((a, b) => a - b)
+    notasCopy.shift()
+    notasCopy.pop()
 
-    let notasSemMaiorEMenorNota = notas.filter(nota => nota !== maiorNota && nota !== menorNota)
-
+    let notasSemMaiorEMenorNota = notasCopy
+   // console.log(notasSemMaiorEMenorNota)
+    
     let somaNotas = notasSemMaiorEMenorNota.reduce(function(total, nota){
         return total + nota
     }, 0)
 
-    return somaNotas/notasSemMaiorEMenorNota.length - 1
+    return somaNotas/notasSemMaiorEMenorNota.length
 
 
 }
+
+function main(atletas){
+    
+    let resultadoArr = []
+   
+    for (let i = 0; i < atletas.length; i++){
+
+        let media = calcularMediaSemAMenorEMaiorNota(atletas[i])
+
+        resultadoArr.push({
+            nome: atletas[i].nome,
+            notas: atletas[i].notas,
+            media: media
+        })
+    
+    }
+    
+    console.log(resultadoArr)
+    return resultadoArr
+
+}
+
+main(atletas)
+
+/* A saída deve ser:
+
+Atleta: Cesar Abascal
+Notas Obtidas: 10,10,7.88,8.42,9.34
+Média Válida: 9,253333
+
+Atleta: Fernando Puntel
+Notas Obtidas: 10,10,7,8,9.33
+Média Válida: 9.11
+
+Atleta: Daiane Jelinsky
+Notas Obtidas: 10,7,8,9.5,9.5
+Média Válida: 9
+
+Atleta: Bruno Castro
+Notas Obtidas: 10,10,10,9,9.5
+Média Válida: 9.83333333333 */
