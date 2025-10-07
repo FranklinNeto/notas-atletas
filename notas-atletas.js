@@ -24,17 +24,31 @@ atleta. Por fim, deverá apresentar ao usuário o nome de cada atleta, seguido d
 
 
 
-function obterMaiorNota(atleta/* objeto atleta {nome, notas} */){
-
-    let notas = atleta.notas
-
+function obterMaiorNota(notas){
 
     notas.sort((a, b) => a - b)
-
-    console.log(notas)
-
     return notas[notas.length-1]
 
 }
 
-console.log(obterMaiorNota({nome: "neto", notas:[60,31,56,25]}))
+function obterMenorNota(notas){
+    notas.sort((a, b) => a - b)
+    return notas[0]
+}
+
+function calcularMediaSemAMenorEMaiorNota(atleta){
+
+    let notas = atleta.notas
+    let maiorNota = obterMaiorNota(notas)
+    let menorNota = obterMenorNota(notas)
+
+    let notasSemMaiorEMenorNota = notas.filter(nota => nota !== maiorNota && nota !== menorNota)
+
+    let somaNotas = notasSemMaiorEMenorNota.reduce(function(total, nota){
+        return total + nota
+    }, 0)
+
+    return somaNotas/notasSemMaiorEMenorNota.length - 1
+
+
+}
