@@ -21,20 +21,6 @@ let atletas = [
 cinco notas atribuídas. A sua função deverá calcular a média das notas sem considerar a maior e menor nota do 
 atleta. Por fim, deverá apresentar ao usuário o nome de cada atleta, seguido das notas e da média calculada. */
 
-
-/* function obterMaiorNota(notas){
-    notasCopy = [...notas]
-    notasCopy.sort((a, b) => a - b)
-    return notasCopy[notas.length-1]
-
-}
-
-function obterMenorNota(notas){
-    let notasCopy = [...notas]
-    notasCopy.sort((a, b) => a - b)
-    return notasCopy[0]
-} */
-
 function calcularMediaSemAMenorEMaiorNota(atleta){
 
     let notasCopy = [...atleta.notas]
@@ -44,7 +30,6 @@ function calcularMediaSemAMenorEMaiorNota(atleta){
     notasCopy.pop()
 
     let notasSemMaiorEMenorNota = notasCopy
-   // console.log(notasSemMaiorEMenorNota)
     
     let somaNotas = notasSemMaiorEMenorNota.reduce(function(total, nota){
         return total + nota
@@ -57,22 +42,27 @@ function calcularMediaSemAMenorEMaiorNota(atleta){
 
 function main(atletas){
     
-    let resultadoArr = []
+    let resultadoArrObj = []
    
     for (let i = 0; i < atletas.length; i++){
 
         let media = calcularMediaSemAMenorEMaiorNota(atletas[i])
 
-        resultadoArr.push({
-            nome: atletas[i].nome,
-            notas: atletas[i].notas,
-            media: media
+        resultadoArrObj.push({
+            nome: `Atleta: ${atletas[i].nome}`,
+            notas: `Notas Obtidas: ${atletas[i].notas}`,
+            media: `Média Válida: ${media}\n`
         })
-    
+        
     }
+
     
-    console.log(resultadoArr)
-    return resultadoArr
+    resultadoArrObj.forEach(function (resultado) {
+
+      console.log(resultado.nome) 
+      console.log(resultado.notas)
+      console.log(resultado.media)
+    })
 
 }
 
